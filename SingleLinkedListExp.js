@@ -40,7 +40,6 @@ SingleList.prototype.searchAt =  function(pos) {
 }
 
 SingleList.prototype.removeAt = function(pos) {
-	pos++;
 	var count = 0;
 	var node = this.head;
 	while(count < this.length) {
@@ -51,14 +50,13 @@ SingleList.prototype.removeAt = function(pos) {
 				return;
 				}
 			else {
-				var tmpNode = node; 
-				nodeTodelete = node.next; 
-				tmpNode.next = nodeTodelete?nodeTodelete.next:null;
-				nodeTodelete = null;
+				previosNode.next = node.next;
+				node = null;
 				return;
 				}
 			}
 		else {
+			previosNode = node;
 			node = node.next;
 			}
 		count++;
