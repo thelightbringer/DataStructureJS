@@ -1,25 +1,50 @@
-const primes = num => {
-    const arr = Array(num).fill(true);
-    arr[0] = false;
-    arr[1] = false;
-    for(let i=2;i<Math.sqrt(num);i++) {
-        for(let j=2;i*j<num;j++) {
-            arr[i*j] = false;
-        }
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.children = [];
     }
-    return arr.reduce((acc, val, index) => 
-        val ? acc.concat(index):acc, []);
-
-    //return arr.reduce((primes, isPrime, prime) => (isPrime ? primes.concat(prime) : primes),[]);
-
 }
+class Tree {
+    constructor() {
+        this.root = null;
+    }
+    add(data) {
+        this.children.push(new Node(data));
+    }
+    remove(data) {
+        this.children = this.children.filter(child => child.data !== data);
+    }
+    traverseDF(val) {
+        let collection = [this.root];
+        while(collection.length) {
+            let node = collection.shift();
+            if(node.data == val) {
+                return true;
+            } else {
+                collection.unshift(...node.children);
+            }
+        }
+        return false;
+    }
+    traverseBF(vl) {
+        let collection = [this.root];
+        while(collection.length) {
+            let node = collection.shift();
+            if(node.data == val) {
+                return true;
+            } else {
+                collection.push(...node.children);
+            }
+        }
+        return false;
+    }
+}
+
 
 mocha.setup("bdd");
 const {assert} = chai;
 
-describe("Sieve of Eratosthenes", () => {
-    it("Should return all prime numbers", () => {
-     assert.deepEqual(primes(10), [2, 3, 5, 7]);
-    });
+describe("Binary Tree", () => {
+    // TBD
    });
 mocha.run();
