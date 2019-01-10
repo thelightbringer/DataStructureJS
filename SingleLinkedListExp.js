@@ -1,6 +1,6 @@
 /*
 Constructor functions
-*/  
+*/
 function Node(data) {
 	this.data = data;
 	this.next = null;
